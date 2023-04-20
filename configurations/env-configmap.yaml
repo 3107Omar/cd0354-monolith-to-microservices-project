@@ -1,0 +1,7 @@
+POSTGRES_DB=postgres
+POSTGRES_HOST=project-three-database.c5nh9qs6xvtk.us-east-1.rds.amazonaws.com
+URL=http://localhost:8100
+AWS_BUCKET=monolithic-tomicroservice-bucket
+AWS_REGION=us-east-1
+AWS_PROFILE=default
+JWT_SECRET=hello

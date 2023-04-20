@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: api-feed
+  name: api-feed
+spec:
+  selector:
+    matchLabels:
+      service: api-feed
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        service: api-feed
+    spec:
+      containers:
+      - image: karimaali/udagram-api-feed:v1
+        name: api-feed
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        envFrom:
+          - secretRef:
+              name: env-secret
+          - configMapRef:
+              name: env-configmap
