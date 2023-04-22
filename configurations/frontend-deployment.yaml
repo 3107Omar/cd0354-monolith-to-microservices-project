@@ -16,7 +16,7 @@ spec:
     spec: 
       containers:
       - name: frontend 
-        image: karimaali/udagram-api-frontend:v1
+        image: karimaali/udagram-frontend:local
         imagePullPolicy: Always
         resources: 
           requests: 
