@@ -15,7 +15,7 @@ spec:
         service: reverseproxy
     spec:
       containers:
-      - image: karimaali/udagram-reverseproxy:v2
+      - image: karimaali/udagram-reverseproxy:v1
         name: reverseproxy
         imagePullPolicy: Always
         resources:

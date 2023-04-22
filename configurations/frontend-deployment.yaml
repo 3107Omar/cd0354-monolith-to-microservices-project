@@ -1,38 +1,50 @@
 apiVersion: apps/v1 
 kind: Deployment 
 metadata: 
- name: frontend 
-labels: 
-app: frontend 
-spec: 
- replicas: 1
- selector: 
-   matchLabels:
+  name: frontend 
+  labels: 
     app: frontend 
-
- template: 
-  metadata: 
-   labels: 
-    app: frontend
-  spec: 
-   containers:
-   - name: frontend 
-   image: karimaali/udagram-api-frontend:v1
-   imagePullPolicy: Always
-   resources: 
-    requests: 
-     memory: "128Mi"
-     cpu: "250m"
-     limits:
-      memory: "1024Mi"
-      cpu: "500m"
-     envForm:
-     -secretRef:
-      name: env-secret
-    -configMapRef:
-      name: env-config
-    -secretRef:
-      name: aws-secret
-
-   ports: 
-   - containerPort: 8080
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: frontend 
+  template: 
+    metadata: 
+      labels: 
+        app: frontend
+    spec: 
+      containers:
+      - name: frontend 
+        image: karimaali/udagram-api-frontend:v1
+        imagePullPolicy: Always
+        resources: 
+          requests: 
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"
+        env:
+        - name: SECRET_NAME
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: secret_name
+        - name: CONFIG_VALUE
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: config_value
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: access_key_id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: secret_access_key
+        ports: 
+        - containerPort: 8080
